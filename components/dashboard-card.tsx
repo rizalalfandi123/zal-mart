@@ -28,8 +28,9 @@ export const DashboardCard: FunctionComponent = () => {
           </Grid>
         </Grid>
         <Grid xs={12} sx={{ display: "flex", gap: 1, overflowY: "auto" }}>
-          {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map(() => (
+          {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((a, index) => (
             <Box
+              key={index}
               sx={{
                 height: "20rem",
                 width: "12rem",
