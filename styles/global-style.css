@@ -1,0 +1,58 @@
+:root {
+  --primary-color: #818cf8;
+  --backgrounnd-color: #f8fafc;
+  --swiper-navigation-color: var(--primary-color);
+  --swiper-theme-color: var(--primary-color);
+  --swiper-pagination-color: var(--primary-color);
+  --swiper-pagination-bullet-size: 12px;
+}
+
+html,
+body {
+  background-color: var(--backgrounnd-color);
+}
+
+*::-webkit-scrollbar {
+  width: 1em;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: var(--backgrounnd-color);
+  border-radius: 0.5em;
+  margin: 0 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #d1d5db;
+  border-radius: 0.5em;
+}
+
+.swiper-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal {
+  bottom: 20px !important;
+  width: fit-content !important;
+  left: 45% !important;
+  background-color: white;
+  padding: 0 4px;
+  border-radius: 20px;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  background-color: white;
+  font-size: 1.2rem !important;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--primary-color) !important;
+  width: 2rem !important;
+  height: 2rem !important;
+}

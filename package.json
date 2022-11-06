@@ -6,19 +6,41 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:connect": "pscale connect zal-mart dev --port 3309"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@fontsource/poppins": "^4.5.10",
+    "@hookform/resolvers": "^2.9.10",
+    "@mui/icons-material": "^5.10.9",
+    "@mui/material": "^5.10.11",
+    "@prisma/client": "^4.5.0",
+    "@reduxjs/toolkit": "^1.8.6",
+    "axios": "^1.1.3",
+    "bcrypt": "^5.1.0",
     "next": "13.0.0",
+    "next-auth": "^4.15.0",
+    "nextjs-progressbar": "^0.0.16",
+    "notistack": "^2.0.8",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-hook-form": "^7.38.0",
+    "react-redux": "^8.0.4",
+    "redux-logger": "^3.0.6",
+    "swiper": "^8.4.4",
+    "zod": "^3.19.1"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@types/node": "18.11.6",
     "@types/react": "18.0.23",
     "@types/react-dom": "18.0.7",
+    "@types/redux-logger": "^3.0.9",
     "eslint": "8.26.0",
     "eslint-config-next": "13.0.0",
+    "prisma": "^4.5.0",
     "typescript": "4.8.4"
   }
 }
