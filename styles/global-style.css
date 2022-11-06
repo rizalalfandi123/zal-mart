@@ -8,7 +8,8 @@
 }
 
 html,
-body {
+body,
+div {
   background-color: var(--backgrounnd-color);
 }
 
@@ -31,10 +32,13 @@ body {
 .swiper-pagination-bullets.swiper-pagination-horizontal {
   bottom: 20px !important;
   width: fit-content !important;
-  left: 45% !important;
+  left: 35% !important;
   background-color: white;
   padding: 0 4px;
   border-radius: 20px;
+  @media screen and (min-width: 480px) {
+    left: 45% !important;
+  }
 }
 
 .swiper-button-next:after,
