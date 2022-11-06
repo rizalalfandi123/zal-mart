@@ -2,7 +2,7 @@ import { useState, forwardRef } from "react";
 import { IconButton, InputAdornment, TextField, TextFieldProps } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
-export const PasswordField = forwardRef((props: TextFieldProps, ref) => {
+const PasswordField = forwardRef((props: TextFieldProps, ref) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const handleClickShowPassword = () => setShowPassword(!showPassword);
@@ -28,3 +28,7 @@ export const PasswordField = forwardRef((props: TextFieldProps, ref) => {
     />
   );
 });
+
+PasswordField.displayName = "PasswordField";
+
+export { PasswordField };
