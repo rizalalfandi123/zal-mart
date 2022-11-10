@@ -33,6 +33,7 @@ const Home: NextPage = () => {
           <Swiper navigation modules={[Navigation]} slidesPerView="auto" spaceBetween={12}>
             {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((_, i) => (
               <SwiperSlide
+                key={i}
                 style={{
                   height: "16rem",
                   border: `1px solid ${colors.grey[300]}`,
@@ -90,6 +91,7 @@ const Home: NextPage = () => {
           >
             {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map(() => (
               <SwiperSlide
+                key={i}
                 style={{
                   height: "16rem",
                   border: `1px solid ${colors.grey[300]}`,
