@@ -6,6 +6,11 @@ export const theme = createTheme({
     allVariants: {
       color: "#334155",
     },
+    fontSize: 12,
+    body1: {
+      fontSize: "0.875rem",
+      fontWeight: "500",
+    },
   },
   breakpoints: {
     values: {
@@ -27,7 +32,7 @@ export const theme = createTheme({
       main: "#f87171",
     },
     background: {
-      default: "#f8fafc",
+      default: "#F5F5F9",
     },
   },
   // shadows: [],
@@ -41,6 +46,18 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: "transparent",
+        },
+      },
+    },
+    MuiTypography: {
+      defaultProps: {
+        variant: "body1",
+      },
+    },
+    MuiBottomNavigationAction: {
+      styleOverrides: {
+        label: {
+          fontSize: "12px",
         },
       },
     },

@@ -10,7 +10,7 @@ export const DashboardCard: FunctionComponent = () => {
   return (
     <Box
       sx={{
-        backgroundColor: "#f8fafc",
+        backgroundColor: "rgb(240, 242, 245)",
         WebkitBoxShadow: "rgb(0 0 0 / 12%) 0px 1px 6px 0px",
         MozBoxShadow: "rgb(0 0 0 / 12%) 0px 1px 6px 0px",
         borderRadius: "1rem",

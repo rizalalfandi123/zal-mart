@@ -1,46 +1,30 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent } from "react";
 import { useRouter } from "next/router";
-import { TextField, Typography, Unstable_Grid2 as Grid } from "@mui/material";
-import GoogleIcon from "@mui/icons-material/Google";
-import { signIn } from "next-auth/react";
+import Grid from "@mui/material/Unstable_Grid2";
+import Typography from "@mui/material/Typography";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useSnackbar } from "notistack";
 
-import { BrandIcon, Link, PasswordField, Button } from "components";
-import { signinSchema } from "schemas";
+import { BrandIcon, Link, Button, Checkbox, TextField } from "components";
+import { signinSchema, SigninType } from "schemas";
 import { AuthFormContainer } from "./styled";
-
-type SigninType = z.infer<typeof signinSchema>;
 
 export const SigninForm: FunctionComponent = () => {
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
-  const [loadingSignin, setLoadingSignin] = useState<boolean>(false);
-
-  const handleButtonGoogleSignin = () => signIn("google", { callbackUrl: "/" });
 
   const onSubmit = async (data: SigninType) => {
-    try {
-      setLoadingSignin(true);
-      const response = await signIn("credentials", { ...data, redirect: false });
-      setLoadingSignin(false);
-
-      if (!response || !response.ok) return enqueueSnackbar("Invalid email or password", { variant: "error" });
-
-      router.push("/");
-    } catch (error) {
-      console.log({ error });
-      enqueueSnackbar("Failed to signin", { variant: "error" });
-    }
+    console.log({ data });
+    // try {
+    // } catch (error) {
+    //   console.log({ error });
+    //   enqueueSnackbar("Failed to signin", { variant: "error" });
+    // }
   };
 
-  const {
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm<SigninType>({
+  const { handleSubmit, control } = useForm<SigninType>({
     resolver: zodResolver(signinSchema),
   });
 
@@ -51,66 +35,36 @@ export const SigninForm: FunctionComponent = () => {
           <BrandIcon fontSize="8rem" />
         </Grid>
         <Grid>
-          <Typography variant="h5" gutterBottom fontWeight={600}>
-            Sign in
+          <Typography variant="h5" fontWeight={600}>
+            Welcome Zal Mart! 👋🏻
           </Typography>
         </Grid>
         <Grid>
-          <Typography>
-            New to Zal Mart? <Link href="/auth/signup">Sign up now</Link>
-          </Typography>
+          <Typography gutterBottom>Please signin to your account</Typography>
         </Grid>
         <Grid>
-          <Controller
-            name="email"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                error={errors.hasOwnProperty("email")}
-                helperText={errors.email?.message}
-                fullWidth
-                label="Enter Your Email"
-              />
-            )}
-          />
+          <TextField<SigninType> control={control} name="email" fullWidth />
         </Grid>
         <Grid>
-          <Controller
-            name="password"
-            control={control}
-            render={({ field }) => (
-              <PasswordField
-                {...field}
-                error={errors.hasOwnProperty("password")}
-                helperText={errors.password?.message}
-                fullWidth
-                label="Enter Your Password"
-              />
-            )}
-          />
+          <TextField<SigninType> control={control} name="password" type="password" fullWidth />
+        </Grid>
+        <Grid container justifyContent="space-between" alignItems="center">
+          <Grid>
+            <Checkbox label={<Typography>Remember me</Typography>} />
+          </Grid>
+          <Grid>
+            <Link href="/">Forgot Password</Link>
+          </Grid>
         </Grid>
         <Grid>
-          <Button fullWidth loading={loadingSignin} size="large" variant="contained" type="submit">
+          <Button fullWidth size="large" variant="contained" type="submit">
             Login
           </Button>
         </Grid>
         <Grid>
-          <Link href="/">Forgot Password</Link>
-        </Grid>
-        <Grid alignSelf="center">
-          <Typography>Or With</Typography>
-        </Grid>
-        <Grid>
-          <Button
-            fullWidth
-            size="large"
-            variant="outlined"
-            startIcon={<GoogleIcon />}
-            onClick={handleButtonGoogleSignin}
-          >
-            Google
-          </Button>
+          <Typography textAlign="center">
+            New to Zal Mart? <Link href="/auth/signup">Sign up now</Link>
+          </Typography>
         </Grid>
       </Grid>
     </AuthFormContainer>

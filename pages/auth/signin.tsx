@@ -1,5 +1,4 @@
 import { NextPage } from "next";
-import { getProviders } from "next-auth/react";
 
 import Box from "@mui/material/Box";
 
@@ -13,12 +12,5 @@ export const SigninPage: NextPage = () => {
     </Box>
   );
 };
-
-export async function getServerSideProps() {
-  const providers = await getProviders();
-  return {
-    props: { providers },
-  };
-}
 
 export default SigninPage;

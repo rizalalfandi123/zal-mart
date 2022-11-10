@@ -6,8 +6,10 @@ export const navbarContainerStyle: SxProps<Theme> = ({ breakpoints, palette }) =
   bottom: 0,
   left: 0,
   right: 0,
-  WebkitBoxShadow: "rgb(0 0 0 / 12%) 0px 1px 6px 0px",
-  MozBoxShadow: "rgb(0 0 0 / 12%) 0px 1px 6px 0px",
+  height: "6rem",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
   backgroundColor: palette.background.default,
   [breakpoints.up("md")]: {
     display: "none",

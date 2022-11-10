@@ -3,9 +3,11 @@ import { signupService } from "services";
 import { ApiHandlerType } from "types";
 import { METHOD_NOT_ALLOWED, RESPONSE_METHOD_NOT_ALLOWED } from "utils";
 
-const signup: ApiHandlerType = async (req: NextApiRequest, res: NextApiResponse) => {
+const signin: ApiHandlerType = async (req: NextApiRequest, res: NextApiResponse) => {
   // TODO: return error when http method not POST
-  return res.status(200).send({ test: "ok" });
+  if (req.method !== "POST") return res.status(METHOD_NOT_ALLOWED).send(RESPONSE_METHOD_NOT_ALLOWED);
+
+  return signupService(req, res);
 };
 
-export default signup;
+export default signin;

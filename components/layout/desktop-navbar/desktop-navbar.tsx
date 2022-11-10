@@ -22,41 +22,52 @@ import {
 const SearchFieldInputProps: Partial<OutlinedInputProps> = {
   endAdornment: (
     <InputAdornment position="end">
-      <IconButton size="small" sx={searchIconStyle}>
-        <SearchIcon />
+      <IconButton sx={searchIconStyle}>
+        <SearchIcon fontSize="inherit"/>
       </IconButton>
     </InputAdornment>
   ),
   sx: searchFieldStyle,
   inputProps: {
-    style: { padding: "10px 14px" },
+    style: { padding: "13px 14px" },
   },
 };
 
 export const DesktopNavbar = () => {
   return (
     <Box sx={navbarContainerStyle}>
-      <Toolbar>
-        <Link href="/">
-          <Typography sx={navbarBrandStyle}>ZAL MART</Typography>
-        </Link>
-        <Box sx={searchbarStyle}>
-          <Button variant="outlined" size="small" sx={buttonCategoriesStyle}>
-            Categories
-          </Button>
-          <TextField
-            variant="outlined"
-            size="small"
-            placeholder="Search"
-            InputProps={SearchFieldInputProps}
-            fullWidth
-          />
-        </Box>
+      <Box
+        sx={{
+          width: "100%",
+          marginLeft: "1rem",
+          marginRight: "1rem",
+          borderRadius: "1rem",
+          backgroundColor: "white",
+          boxShadow: "rgb(50 71 92 / 10%) 0px 2px 10px 0px",
+        }}
+      >
+        <Toolbar>
+          <Link href="/">
+            <Typography sx={navbarBrandStyle}>ZAL MART</Typography>
+          </Link>
+          <Box sx={searchbarStyle}>
+            <Button variant="outlined" size="small" sx={buttonCategoriesStyle}>
+              Categories
+            </Button>
+            <TextField
+              variant="outlined"
+              size="small"
+              placeholder="Search"
+              InputProps={SearchFieldInputProps}
+              fullWidth
+            />
+          </Box>
 
-        <Box sx={rightContentStyle}>
-          <UserMenu />
-        </Box>
-      </Toolbar>
+          <Box sx={rightContentStyle}>
+            <UserMenu />
+          </Box>
+        </Toolbar>
+      </Box>
     </Box>
   );
 };

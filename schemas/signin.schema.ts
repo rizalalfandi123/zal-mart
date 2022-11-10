@@ -8,3 +8,5 @@ export const signinSchema = z.object({
     .string({ required_error: "Password is required", invalid_type_error: "Password must be a string" })
     .min(8, "Password minimum 8 characters"),
 });
+
+export type SigninType = z.infer<typeof signinSchema>;

@@ -5,10 +5,9 @@ export const AuthFormContainer = styled("form")<ComponentProps<"form">>(({ theme
   width: "100%",
   maxWidth: "480px",
   [breakpoints.up("md")]: {
-    WebkitBoxShadow: "rgb(0 0 0 / 12%) 0px 1px 6px 0px",
-    MozBoxShadow: "rgb(0 0 0 / 12%) 0px 1px 6px 0px",
+    boxShadow: "rgb(50 71 92 / 10%) 0px 2px 10px 0px",
     padding: "2rem",
     borderRadius: "1rem",
-    backgroundColor: palette.background.default,
+    backgroundColor: "white",
   },
 }));

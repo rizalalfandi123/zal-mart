@@ -19,9 +19,9 @@ const navbarItems: NavbarItemType[] = [
     pathname: "/",
   },
   {
-    label: "Categories",
+    label: "Products",
     icon: <CategoryRoundedIcon />,
-    pathname: "/categories",
+    pathname: "/products",
   },
   {
     label: "Transactions",
@@ -40,7 +40,18 @@ export const MobileNavbar = () => {
 
   return (
     <Box sx={navbarContainerStyle}>
-      <BottomNavigation showLabels value={router.pathname}>
+      <BottomNavigation
+        showLabels
+        value={router.pathname}
+        sx={{
+          backgroundColor: "white",
+          boxShadow: "rgb(50 71 92 / 10%) 0px 2px 10px 0px",
+          width: "100%",
+          borderRadius: "1rem",
+          marginLeft: "1rem",
+          marginRight: "1rem",
+        }}
+      >
         {navbarItems.map(({ pathname, ...props }, index) => (
           <BottomNavigationAction
             {...props}

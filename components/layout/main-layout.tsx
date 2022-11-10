@@ -13,7 +13,7 @@ const Main = styled("main")<ComponentProps<"main">>(({ theme: { breakpoints } })
   margin: "auto",
   paddingBottom: "96px",
   [breakpoints.up("md")]: {
-    paddingTop: "96px",
+    paddingTop: "6rem",
     paddingBottom: 0,
   },
 }));

@@ -1,6 +1,6 @@
 :root {
   --primary-color: #818cf8;
-  --backgrounnd-color: #f8fafc;
+  --backgrounnd-color: #F5F5F9;
   --swiper-navigation-color: var(--primary-color);
   --swiper-theme-color: var(--primary-color);
   --swiper-pagination-color: var(--primary-color);
@@ -8,36 +8,39 @@
 }
 
 html,
-body,
-div {
+body {
   background-color: var(--backgrounnd-color);
 }
 
 *::-webkit-scrollbar {
-  width: 1em;
+  width: 0.6em;
 }
 
 *::-webkit-scrollbar-track {
   background-color: var(--backgrounnd-color);
-  border-radius: 0.5em;
+  border-radius: 0.3em;
   margin: 0 8px;
 }
 
 *::-webkit-scrollbar-thumb {
   background-color: #d1d5db;
-  border-radius: 0.5em;
+  border-radius: 0.3em;
 }
 
 .swiper-horizontal > .swiper-pagination-bullets,
 .swiper-pagination-bullets.swiper-pagination-horizontal {
   bottom: 20px !important;
   width: fit-content !important;
-  left: 35% !important;
+  left: 40% !important;
   background-color: white;
   padding: 0 4px;
   border-radius: 20px;
-  @media screen and (min-width: 480px) {
-    left: 45% !important;
+}
+
+@media screen and (min-width: 600px) {
+  .swiper-horizontal > .swiper-pagination-bullets,
+  .swiper-pagination-bullets.swiper-pagination-horizontal {
+    left: 47% !important;
   }
 }
 
@@ -52,6 +55,13 @@ div {
   justify-content: center;
   align-items: center;
   font-weight: bold;
+  border: 1px solid var(--primary-color);
+}
+
+.swiper-button-next:hover:after,
+.swiper-button-prev:hover:after {
+  width: 3rem;
+  height: 3rem;
 }
 
 .swiper-button-next,
@@ -59,4 +69,13 @@ div {
   color: var(--primary-color) !important;
   width: 2rem !important;
   height: 2rem !important;
+  border-radius: 50%;
+  transition: all 0.25s;
+  transition-timing-function: linear;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  width: 3rem !important;
+  height: 3rem !important;
 }

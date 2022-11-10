@@ -7,6 +7,10 @@ export const navbarContainerStyle: SxProps<Theme> = ({ breakpoints, palette }) =
   top: 0,
   right: 0,
   left: 0,
+  height: "6rem",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
   backgroundColor: palette.background.default,
   [breakpoints.down("md")]: {
     display: "none",
@@ -16,8 +20,10 @@ export const navbarContainerStyle: SxProps<Theme> = ({ breakpoints, palette }) =
 export const searchIconStyle: SxProps<Theme> = ({ palette }) => ({
   backgroundColor: palette.primary.main,
   borderRadius: "12px",
-  width: "3rem",
+  width: "3.4rem",
+  height: "2.4rem",
   color: "white",
+  fontSize: "1.5rem"
 });
 
 export const searchbarStyle: SxProps<Theme> = {
@@ -26,14 +32,14 @@ export const searchbarStyle: SxProps<Theme> = {
 };
 
 export const navbarBrandStyle: SxProps<Theme> = ({ palette, breakpoints }) => ({
-  marginRight: "2rem",
+  marginRight: "1rem",
   fontWeight: 800,
   fontSize: "1.25rem",
   ":hover": {
     color: palette.primary.main,
   },
   [breakpoints.down("lg")]: {
-    marginRight: "1rem",
+    marginRight: "0.6rem",
     fontSize: "1.1rem",
   },
 });
@@ -44,17 +50,17 @@ export const buttonCategoriesStyle: SxProps<Theme> = {
   borderBottomRightRadius: 0,
   borderTopRightRadius: 0,
   borderRight: "none",
-  fontSize: "1rem",
   fontWeight: 500,
+  fontSize: "0.875rem",
   ":hover": {
     borderRight: "none",
   },
 };
 
 export const rightContentStyle: SxProps<Theme> = ({ breakpoints }) => ({
-  marginLeft: "2rem",
+  marginLeft: "1rem",
   [breakpoints.down("lg")]: {
-    marginLeft: "1rem",
+    marginLeft: "0.6rem",
   },
 });
 
