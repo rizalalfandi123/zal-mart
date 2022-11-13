@@ -2,16 +2,14 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { Prisma, PrismaClient } from "@prisma/client";
 import { z, ZodError } from "zod";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
-import { ApiHandlerType } from "types";
-import { signupSchema } from "schemas";
-import { BAD_REQUEST, CREATED, INTERNAL_SERVER_ERROR, RESPONSE_INTERNAL_SERVER_ERROR } from "utils";
-
-type SignupType = z.infer<typeof signupSchema>;
+import { signupSchema, SignupType } from "schemas";
+import { BAD_REQUEST, CREATED, INTERNAL_SERVER_ERROR, jwtSecret, RESPONSE_INTERNAL_SERVER_ERROR } from "utils";
 
 const prisma = new PrismaClient();
 
-export const signupService: ApiHandlerType = async (req: NextApiRequest, res: NextApiResponse) => {
+export const signupService = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const data: SignupType = req.body;
 
@@ -26,12 +24,14 @@ export const signupService: ApiHandlerType = async (req: NextApiRequest, res: Ne
       data,
     });
 
-    const { password, role, id, ...responseData } = user;
+    const { password, ...responseData } = user;
+
+    const token = jwt.sign(responseData, jwtSecret);
 
     res.status(CREATED).send({
       status: "success",
-      message: "Success to signup",
-      data: responseData,
+      message: `Signin as ${user.name}`,
+      data: { token },
     });
   } catch (error) {
     console.error(error);
@@ -52,7 +52,7 @@ export const signupService: ApiHandlerType = async (req: NextApiRequest, res: Ne
       if (error.code === "P2002") {
         res.status(BAD_REQUEST).send({
           status: "error",
-          message: "Failed to signup",
+          message: "Cannot use your email",
           error: "Email already use",
         });
       }

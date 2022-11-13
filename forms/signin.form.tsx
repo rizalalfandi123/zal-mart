@@ -1,27 +1,36 @@
 import { FunctionComponent } from "react";
 import { useRouter } from "next/router";
-import Grid from "@mui/material/Unstable_Grid2";
-import Typography from "@mui/material/Typography";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useSnackbar } from "notistack";
+import type { User } from "@prisma/client";
+import jwt from "jsonwebtoken";
+import Grid from "@mui/material/Unstable_Grid2";
+import Typography from "@mui/material/Typography";
 
 import { BrandIcon, Link, Button, Checkbox, TextField } from "components";
 import { signinSchema, SigninType } from "schemas";
 import { AuthFormContainer } from "./styled";
+import { useSigninMutation, useAppDispatch, setSnackbarErrorApi, setSuccessSnackbar, addUser } from "state-management";
 
 export const SigninForm: FunctionComponent = () => {
   const router = useRouter();
-  const { enqueueSnackbar } = useSnackbar();
+  const dispatch = useAppDispatch();
+  const [login, { isLoading }] = useSigninMutation();
 
   const onSubmit = async (data: SigninType) => {
-    console.log({ data });
-    // try {
-    // } catch (error) {
-    //   console.log({ error });
-    //   enqueueSnackbar("Failed to signin", { variant: "error" });
-    // }
+    try {
+      const response = await login(data).unwrap();
+      // TODO: set token to localStorage
+      localStorage.setItem("token", response.data.token);
+
+      const user = jwt.decode(response.data.token) as User;
+
+      dispatch(addUser(user));
+      dispatch(setSuccessSnackbar(response.message));
+      router.push("/");
+    } catch (error) {
+      dispatch(setSnackbarErrorApi(error));
+    }
   };
 
   const { handleSubmit, control } = useForm<SigninType>({
@@ -35,7 +44,7 @@ export const SigninForm: FunctionComponent = () => {
           <BrandIcon fontSize="8rem" />
         </Grid>
         <Grid>
-          <Typography variant="h5" fontWeight={600}>
+          <Typography variant="h6" fontWeight={600}>
             Welcome Zal Mart! 👋🏻
           </Typography>
         </Grid>
@@ -57,7 +66,7 @@ export const SigninForm: FunctionComponent = () => {
           </Grid>
         </Grid>
         <Grid>
-          <Button fullWidth size="large" variant="contained" type="submit">
+          <Button fullWidth loading={isLoading} size="large" variant="contained" type="submit">
             Login
           </Button>
         </Grid>

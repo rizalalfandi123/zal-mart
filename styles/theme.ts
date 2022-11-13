@@ -35,7 +35,6 @@ export const theme = createTheme({
       default: "#F5F5F9",
     },
   },
-  // shadows: [],
   components: {
     MuiTextField: {
       defaultProps: {
@@ -67,6 +66,13 @@ export const theme = createTheme({
           ":hover": {
             backgroundColor: "rgb(90, 98, 173)",
           },
+        },
+      },
+    },
+    MuiAvatar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#818cf8",
         },
       },
     },

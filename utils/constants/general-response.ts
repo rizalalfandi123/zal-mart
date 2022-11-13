@@ -6,6 +6,6 @@ export const RESPONSE_METHOD_NOT_ALLOWED = {
 
 export const RESPONSE_INTERNAL_SERVER_ERROR = {
   status: "error",
-  message: "Failed to signup",
+  message: "Something happen on server",
   error: "Internal server error",
 };

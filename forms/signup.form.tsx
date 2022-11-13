@@ -1,32 +1,48 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import { useRouter } from "next/router";
 import Grid from "@mui/material/Unstable_Grid2";
 import Typography from "@mui/material/Typography";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useSnackbar } from "notistack";
+import jwt from "jsonwebtoken";
 
 import { BrandIcon, Link, Button, Checkbox, TextField } from "components";
 import { signupSchema, SignupType } from "schemas";
+import {
+  useRegisterMutation,
+  setSnackbarErrorApi,
+  setSuccessSnackbar,
+  useAppDispatch,
+  addUser,
+} from "state-management";
 import { AuthFormContainer } from "./styled";
+import { User } from "@prisma/client";
 
 export const SignupForm: FunctionComponent = () => {
+  const [disabledButtonRegister, setDisabledButtonRegister] = useState<boolean>(true);
+  const [register, { isLoading }] = useRegisterMutation();
   const router = useRouter();
-  const { enqueueSnackbar } = useSnackbar();
+  const dispatch = useAppDispatch();
 
   const onSubmit = async (data: SignupType) => {
-    console.log({ data });
-    // try {
-    // } catch (error) {
-    //   console.log({ error });
-    //   enqueueSnackbar("Failed to signup", { variant: "error" });
-    // }
+    try {
+      const response = await register(data).unwrap();
+
+      const user = jwt.decode(response.data.token) as User;
+      dispatch(addUser(user));
+      dispatch(setSuccessSnackbar(response.message));
+
+      router.push("/");
+    } catch (error) {
+      dispatch(setSnackbarErrorApi(error));
+    }
   };
 
   const { handleSubmit, control } = useForm<SignupType>({
     resolver: zodResolver(signupSchema),
   });
+
+  const handleChangeCheckboxPolicy = () => setDisabledButtonRegister(!disabledButtonRegister);
 
   return (
     <AuthFormContainer onSubmit={handleSubmit(onSubmit)}>
@@ -35,7 +51,7 @@ export const SignupForm: FunctionComponent = () => {
           <BrandIcon fontSize="8rem" />
         </Grid>
         <Grid>
-          <Typography variant="h5" fontWeight={600}>
+          <Typography variant="h6" fontWeight={600}>
             Explore your favourite smartphone 🚀
           </Typography>
         </Grid>
@@ -54,6 +70,7 @@ export const SignupForm: FunctionComponent = () => {
         <Grid>
           <Grid>
             <Checkbox
+              onChange={handleChangeCheckboxPolicy}
               label={
                 <Typography>
                   I agree to privacy <Link href="/auth/signup">policy & terms</Link>
@@ -63,7 +80,14 @@ export const SignupForm: FunctionComponent = () => {
           </Grid>
         </Grid>
         <Grid>
-          <Button fullWidth size="large" variant="contained" type="submit">
+          <Button
+            fullWidth
+            disabled={disabledButtonRegister}
+            loading={isLoading}
+            size="large"
+            variant="contained"
+            type="submit"
+          >
             Register
           </Button>
         </Grid>

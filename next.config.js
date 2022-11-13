@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['logotyp.us'],
+    domains: ['logotyp.us', 'fdn2.gsmarena.com'],
   },
 }
 

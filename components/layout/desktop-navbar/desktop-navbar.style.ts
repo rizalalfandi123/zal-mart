@@ -23,12 +23,22 @@ export const searchIconStyle: SxProps<Theme> = ({ palette }) => ({
   width: "3.4rem",
   height: "2.4rem",
   color: "white",
-  fontSize: "1.5rem"
+  fontSize: "1.5rem",
 });
 
-export const searchbarStyle: SxProps<Theme> = {
+export const searchbarStyle: SxProps<Theme> = ({ breakpoints }) => ({
+  display: "flex",
+  width: "60%",
+  [breakpoints.down("lg")]: {
+    width: "75%",
+  },
+});
+
+export const centerContentStyle: SxProps<Theme> = {
   flexGrow: 1,
   display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
 };
 
 export const navbarBrandStyle: SxProps<Theme> = ({ palette, breakpoints }) => ({

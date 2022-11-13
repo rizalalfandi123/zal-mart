@@ -17,13 +17,14 @@ import {
   navbarContainerStyle,
   rightContentStyle,
   searchbarStyle,
+  centerContentStyle
 } from "./desktop-navbar.style";
 
 const SearchFieldInputProps: Partial<OutlinedInputProps> = {
   endAdornment: (
     <InputAdornment position="end">
       <IconButton sx={searchIconStyle}>
-        <SearchIcon fontSize="inherit"/>
+        <SearchIcon fontSize="inherit" />
       </IconButton>
     </InputAdornment>
   ),
@@ -50,17 +51,19 @@ export const DesktopNavbar = () => {
           <Link href="/">
             <Typography sx={navbarBrandStyle}>ZAL MART</Typography>
           </Link>
-          <Box sx={searchbarStyle}>
-            <Button variant="outlined" size="small" sx={buttonCategoriesStyle}>
-              Categories
-            </Button>
-            <TextField
-              variant="outlined"
-              size="small"
-              placeholder="Search"
-              InputProps={SearchFieldInputProps}
-              fullWidth
-            />
+          <Box sx={centerContentStyle}>
+            <Box sx={searchbarStyle}>
+              <Button variant="outlined" size="small" sx={buttonCategoriesStyle}>
+                Categories
+              </Button>
+              <TextField
+                variant="outlined"
+                size="small"
+                placeholder="Search"
+                InputProps={SearchFieldInputProps}
+                fullWidth
+              />
+            </Box>
           </Box>
 
           <Box sx={rightContentStyle}>

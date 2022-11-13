@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { Prisma, PrismaClient } from "@prisma/client";
 import { z, ZodError } from "zod";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 import { ApiHandlerType } from "types";
 import { signinSchema } from "schemas";
@@ -12,6 +13,7 @@ import {
   RESPONSE_INTERNAL_SERVER_ERROR,
   NOT_FOUND,
   UNAUTHORIZED,
+  jwtSecret,
 } from "utils";
 
 type SigninType = z.infer<typeof signinSchema>;
@@ -36,7 +38,7 @@ export const signinService: ApiHandlerType = async (req: NextApiRequest, res: Ne
     if (!user) {
       return res.status(NOT_FOUND).send({
         status: "error",
-        message: "Failed to signin",
+        message: "You not registered",
         error: "User not found",
       });
     }
@@ -47,15 +49,21 @@ export const signinService: ApiHandlerType = async (req: NextApiRequest, res: Ne
     if (!isCorrectPassword) {
       return res.status(UNAUTHORIZED).send({
         status: "error",
-        message: "Failed to signin",
+        message: "Your password is invalid",
         error: "Password invalid",
       });
     }
 
+    // TODO: exclude password
+    const { password, ...dataResponse } = user;
+
+    // TODO: heneate JWT token
+    const token = jwt.sign(dataResponse, jwtSecret);
+
     res.status(CREATED).send({
       status: "success",
-      message: "Success to signin",
-      data: user,
+      message: `Signin as ${user.name}`,
+      data: { token },
     });
   } catch (error) {
     console.error(error);

@@ -13,7 +13,7 @@ import { Layout, SnackbarProvider } from "components";
 import { store } from "state-management";
 import { theme } from "styles";
 
-export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+export const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
   return (
     <ReduxProvider store={store}>
       <CssBaseline />
@@ -27,4 +27,6 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
       </ThemeProvider>
     </ReduxProvider>
   );
-}
+};
+
+export default App;
