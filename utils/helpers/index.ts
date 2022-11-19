@@ -1,1 +1,1 @@
-export * from "./get-user-from-local"
+export * from "./convert-query";

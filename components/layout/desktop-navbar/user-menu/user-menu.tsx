@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import jwt from "jsonwebtoken";
-import { User } from "@prisma/client";
+import type { User } from "@prisma/client";
 
-import Avatar from "@mui/material/Avatar";
 import { SxProps, Theme } from "@mui/material";
 
-import { Button, AccountMenu } from "components";
+import { Button } from "components";
 import { getAuthState, useAppSelector, useAppDispatch, addUser } from "state-management";
+import { AccountMenu } from "./account-menu";
 
 const buttonLoginStyle: SxProps<Theme> = {
   width: "6rem",

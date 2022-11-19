@@ -1,23 +1,25 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { PrismaClient, Cpu } from "@prisma/client";
-import queryString from "query-string";
+import { PrismaClient } from "@prisma/client";
 
-import { CREATED, INTERNAL_SERVER_ERROR, RESPONSE_INTERNAL_SERVER_ERROR } from "utils";
+import { convertQuery, CREATED, INTERNAL_SERVER_ERROR, RESPONSE_INTERNAL_SERVER_ERROR } from "utils";
+
+import type { Cpu } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 export const getCpuService = async (req: NextApiRequest, res: NextApiResponse) => {
-  const parseQuery = queryString.extract(req.url || "");
-  console.log({ req: req.query, parseQuery });
-
+  const query = convertQuery<Cpu>(req.url);
   try {
-    console.log({});
-    const cpuData = await prisma.cpu.findMany({});
+    const cpu = await prisma.cpu.findMany({
+      ...query.pagination,
+      where: query.filter,
+      orderBy: query.sort,
+    });
 
     res.status(CREATED).send({
       status: "success",
       message: "Success to get data cpu",
-      data: cpuData,
+      data: cpu,
     });
   } catch (error) {
     console.error(error);

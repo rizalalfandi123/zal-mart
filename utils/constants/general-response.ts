@@ -1,11 +1,11 @@
 export const RESPONSE_METHOD_NOT_ALLOWED = {
   status: "error",
-  message: "Http Method Not Allowed",
-  error: "Allowed only POST method",
+  message: "Http method not support in this endpoint",
+  data: null,
 };
 
 export const RESPONSE_INTERNAL_SERVER_ERROR = {
   status: "error",
   message: "Something happen on server",
-  error: "Internal server error",
+  data: null,
 };

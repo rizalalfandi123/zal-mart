@@ -1,5 +1,16 @@
 import { createTheme } from "@mui/material";
 
+declare module "@mui/material/styles" {
+  interface BreakpointOverrides {
+    xxs: true;
+    xs: true;
+    sm: true;
+    md: true;
+    lg: true;
+    xl: true;
+  }
+}
+
 export const theme = createTheme({
   typography: {
     fontFamily: '"Poppins", sans-serif',
@@ -14,7 +25,8 @@ export const theme = createTheme({
   },
   breakpoints: {
     values: {
-      xs: 0,
+      xxs: 0,
+      xs: 420,
       sm: 640,
       md: 768,
       lg: 1280,
@@ -60,12 +72,11 @@ export const theme = createTheme({
         },
       },
     },
-    MuiIconButton: {
+    MuiDialogTitle: {
       styleOverrides: {
         root: {
-          ":hover": {
-            backgroundColor: "rgb(90, 98, 173)",
-          },
+          fontSize: "1.2rem",
+          fontWeight: 600,
         },
       },
     },

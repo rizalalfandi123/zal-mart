@@ -1,15 +1,14 @@
 import { CSSProperties } from "react";
 import { NextPage } from "next";
+import "swiper/css/grid";
 
 import Grid from "@mui/material/Unstable_Grid2";
-
-import { Banner } from "page-components";
-import "swiper/css/grid";
 import Box from "@mui/material/Box";
-import Image from "next/image";
+import Typography from "@mui/material/Typography";
+import { SxProps, Theme } from "@mui/material";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Grid as SwiperGrid } from "swiper";
-import { colors, Typography, styled, SxProps, Theme } from "@mui/material";
 
 import { BrandCard, ProductCard, Link } from "components";
 import type { BrandCardItemType } from "types";

@@ -12,3 +12,4 @@ export type BrandCardItemType = {
   name: string;
   imageUrl: string;
 };
+

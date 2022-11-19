@@ -68,14 +68,22 @@ export const buttonCategoriesStyle: SxProps<Theme> = {
 };
 
 export const rightContentStyle: SxProps<Theme> = ({ breakpoints }) => ({
-  marginLeft: "1rem",
-  [breakpoints.down("lg")]: {
-    marginLeft: "0.6rem",
-  },
+  display: "flex",
+  alignItems: "center",
+  gap: 2,
 });
 
 export const searchFieldStyle: SxProps<Theme> = {
   paddingRight: "4px",
   borderTopLeftRadius: 0,
   borderBottomLeftRadius: 0,
+};
+
+export const navbarStyle: SxProps<Theme> = {
+  width: "100%",
+  marginLeft: "1rem",
+  marginRight: "1rem",
+  borderRadius: "1rem",
+  backgroundColor: "white",
+  boxShadow: "rgb(50 71 92 / 10%) 0px 2px 10px 0px",
 };

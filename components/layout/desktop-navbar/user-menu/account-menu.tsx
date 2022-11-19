@@ -9,9 +9,7 @@ import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
-import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import { SxProps, Theme } from "@mui/material";
@@ -19,16 +17,16 @@ import { SxProps, Theme } from "@mui/material";
 type AccountMenuType = FunctionComponent<User>;
 type AccountMenuItemType = { name: string; icon: ReactNode; onClick: MouseEventHandler<HTMLLIElement> };
 
-const avatarStyle: SxProps<Theme> = ({ palette: { primary } }) => ({
+const avatarStyle: SxProps<Theme> = {
   width: 36,
   height: 36,
-});
+};
 
 const paperStype: SxProps<Theme> = () => ({
   width: "16rem",
   overflow: "visible",
   filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-  marginTop: 1.5,
+  marginTop: 2,
   "& .MuiAvatar-root": {
     marginRight: 1,
   },
@@ -70,7 +68,7 @@ export const AccountMenu: AccountMenuType = (props) => {
     setAnchorEl(null);
   };
 
-  const avatar = <Avatar sx={avatarStyle}>{name.substring(0, 1)}</Avatar>;
+  const avatar = <Avatar sx={avatarStyle}>{name.substring(0, 1).toUpperCase()}</Avatar>;
 
   const accountMenuItems: AccountMenuItemType[] = [
     {
@@ -91,8 +89,7 @@ export const AccountMenu: AccountMenuType = (props) => {
         <Tooltip title="Account Menu">
           <IconButton
             onClick={handleClick}
-            size="small"
-            sx={{ ml: 2 }}
+            // size="small"
             aria-controls={open ? "account-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
@@ -114,7 +111,7 @@ export const AccountMenu: AccountMenuType = (props) => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem sx={{ height: "2.5rem", ":hover": { "& .MuiMenuItem-root": { backgroundColor: "red" } } }}>
+        <MenuItem>
           {avatar} {name}
         </MenuItem>
         <Divider />
