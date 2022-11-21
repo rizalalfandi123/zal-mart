@@ -140,8 +140,8 @@ const AppMenu = () => {
       </Tooltip>
       <Modal maxWidth="md" title="Menu" name={modalName}>
         <Grid container spacing={2}>
-          {Array.from(Array(8)).map(() => (
-            <Grid xs={4}>
+          {Array.from(Array(8)).map((_, i) => (
+            <Grid key={i} xs={4}>
               <Box sx={appMenuStyle}>
                 <DashboardRoundedIcon sx={appMenuIconStyle} />
                 <Typography sx={appMenuTitleStyle}>Dashboard Admin</Typography>
