@@ -26,11 +26,14 @@ type ModalProps = {
 type ModalType = FunctionComponent<Omit<DialogProps, "maxWidth" | "open"> & ModalProps>;
 
 const dialogTitleStyle: SxProps<Theme> = {
-  paddingTop: "4px",
-  paddingRight: "4px",
+  position: "relative"
 };
 
-const iconCloseContainerStyle: SxProps<Theme> = { display: "flex", justifyContent: "flex-end" };
+const iconCloseStyle: SxProps<Theme> = {
+  position: "absolute",
+  top: "4px",
+  right: "4px"
+}
 
 const dialogContentStyle: (theme: Theme, maxWidth: Breakpoint) => SxProps<Theme> = ({ breakpoints }, maxWidth) => ({
   width: breakpoints.values[maxWidth] - 48 + "px",
@@ -60,11 +63,9 @@ export const Modal: ModalType = (props) => {
   return (
     <Dialog {...dialogProps} open={open} onClose={handleClose} fullScreen={fullScreen} sx={dialogStyle}>
       <DialogTitle {...dialogTitleProps} sx={dialogTitleStyle}>
-        <Box sx={iconCloseContainerStyle}>
-          <IconButton onClick={handleClose}>
+          <IconButton sx={iconCloseStyle} onClick={handleClose}>
             <CancelRoundedIcon />
           </IconButton>
-        </Box>
         {props.title}
       </DialogTitle>
       <DialogContent {...dialogContentProps} sx={(theme) => ({ ...dialogContentStyle(theme, props.maxWidth) })}>

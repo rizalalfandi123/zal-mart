@@ -17,6 +17,11 @@ import {
 } from "state-management";
 import { AuthFormContainer } from "./styled";
 import { User } from "@prisma/client";
+import type { SxProps, Theme } from "@mui/material";
+
+const buttonStyle: SxProps<Theme> = {
+  padding: "1rem 2rem",
+};
 
 export const SignupForm: FunctionComponent = () => {
   const [disabledButtonRegister, setDisabledButtonRegister] = useState<boolean>(true);
@@ -87,6 +92,7 @@ export const SignupForm: FunctionComponent = () => {
             size="large"
             variant="contained"
             type="submit"
+            sx={buttonStyle}
           >
             Register
           </Button>

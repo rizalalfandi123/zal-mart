@@ -11,7 +11,7 @@ const Main = styled("main")<ComponentProps<"main">>(({ theme: { breakpoints } })
   paddingLeft: "12px",
   paddingRight: "12px",
   margin: "auto",
-  height: "-webkit-fill-available",
+  height: "100%",
   paddingBottom: "96px",
   [breakpoints.up("md")]: {
     paddingTop: "6rem",

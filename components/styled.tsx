@@ -1,5 +1,6 @@
+import type { ComponentProps } from "react";
+import NextLink, { LinkProps as NextLinkProps } from "next/link";
 import { styled } from "@mui/material";
-import { ComponentProps } from "react";
 
 export const AuthFormContainer = styled("form")<ComponentProps<"form">>(({ theme: { breakpoints } }) => ({
   width: "100%",
@@ -10,4 +11,10 @@ export const AuthFormContainer = styled("form")<ComponentProps<"form">>(({ theme
     borderRadius: "1rem",
     backgroundColor: "white",
   },
+}));
+
+export const Link = styled(NextLink)<NextLinkProps>(({ theme: { palette } }) => ({
+  textDecoration: "none",
+  fontSize: "0.875rem",
+  color: palette.primary.main,
 }));

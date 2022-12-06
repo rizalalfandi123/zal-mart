@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import { FunctionComponent, MouseEventHandler, ReactNode } from "react";
 import { User } from "@prisma/client";
 
@@ -18,45 +18,13 @@ type AccountMenuType = FunctionComponent<User>;
 type AccountMenuItemType = { name: string; icon: ReactNode; onClick: MouseEventHandler<HTMLLIElement> };
 
 const avatarStyle: SxProps<Theme> = {
-  width: 36,
-  height: 36,
+  width: 32,
+  height: 32,
 };
-
-const paperStype: SxProps<Theme> = () => ({
-  width: "16rem",
-  overflow: "visible",
-  filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-  marginTop: 2,
-  "& .MuiAvatar-root": {
-    marginRight: 1,
-  },
-  "&:before": {
-    content: '""',
-    display: "block",
-    position: "absolute",
-    top: 0,
-    right: 14,
-    width: 10,
-    height: 10,
-    bgcolor: "background.paper",
-    transform: "translateY(-50%) rotate(45deg)",
-    zIndex: 0,
-  },
-  "& .MuiMenuItem-root": {
-    minHeight: "3rem",
-    marginLeft: "8px",
-    marginRight: "8px",
-    padding: "8px",
-    borderRadius: "1rem",
-    ":hover": {
-      backgroundColor: "#e0e7ff",
-    },
-  },
-});
 
 export const AccountMenu: AccountMenuType = (props) => {
   const { name } = props;
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const open = Boolean(anchorEl);
 
@@ -87,27 +55,14 @@ export const AccountMenu: AccountMenuType = (props) => {
     <>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
         <Tooltip title="Account Menu">
-          <IconButton
-            onClick={handleClick}
-            // size="small"
-            aria-controls={open ? "account-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-          >
-            {avatar}
-          </IconButton>
+          <IconButton onClick={handleClick}>{avatar}</IconButton>
         </Tooltip>
       </Box>
       <Menu
         anchorEl={anchorEl}
-        id="account-menu"
         open={open}
         onClose={handleClose}
         onClick={handleClose}
-        PaperProps={{
-          elevation: 0,
-          sx: paperStype,
-        }}
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >

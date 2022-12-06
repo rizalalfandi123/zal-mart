@@ -8,7 +8,7 @@ type NavbarType = FunctionComponent<ComponentProps<"nav">>;
 
 export const Navbar: NavbarType = () => {
   const pathname = useRouter().pathname;
-  const authPage = pathname === "/auth/signin" || pathname === "/auth/signup";
+  const authPage = pathname === "/auth/signup" || pathname === "/login";
 
   if (authPage) return null;
 

@@ -25,7 +25,6 @@ const producCardSwipperStyle: CSSProperties = {
 const brandContainerStyle: SxProps<Theme> = {
   backgroundColor: "white",
   padding: "1rem",
-  marginTop: "1rem",
   borderRadius: "1rem",
   boxShadow: "rgb(50 71 92 / 10%) 0px 2px 10px 0px",
 };
@@ -35,7 +34,7 @@ const newArrivalContainerStyle: SxProps<Theme> = ({ breakpoints }) => ({
   padding: "1rem",
   borderRadius: "1rem",
   boxShadow: "rgb(50 71 92 / 10%) 0px 2px 10px 0px",
-  height: "47rem",
+  height: "52rem",
   [breakpoints.down("md")]: {
     height: "42rem",
   },
@@ -57,7 +56,7 @@ const brandCardItems: BrandCardItemType[] = [
 
 const Home: NextPage = () => {
   return (
-    <Grid container direction="column" spacing={3}>
+    <Grid container direction="column" spacing={2}>
       <Grid xs={12}>
         <Box sx={brandContainerStyle}>
           <Box sx={boxContainerTitleStyle}>

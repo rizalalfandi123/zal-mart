@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material";
+import { createTheme, SxProps, Theme } from "@mui/material";
 
 declare module "@mui/material/styles" {
   interface BreakpointOverrides {
@@ -10,6 +10,38 @@ declare module "@mui/material/styles" {
     xl: true;
   }
 }
+
+const menuPaperStype: SxProps<Theme> = () => ({
+  width: "16rem",
+  overflow: "visible",
+  filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+  marginTop: 2,
+  "& .MuiAvatar-root": {
+    marginRight: 1,
+  },
+  "&:before": {
+    content: '""',
+    display: "block",
+    position: "absolute",
+    top: 0,
+    right: 14,
+    width: 10,
+    height: 10,
+    bgcolor: "background.paper",
+    transform: "translateY(-50%) rotate(45deg)",
+    zIndex: 0,
+  },
+  "& .MuiMenuItem-root": {
+    minHeight: "2rem",
+    marginLeft: "8px",
+    marginRight: "8px",
+    padding: "8px",
+    borderRadius: "0.8rem",
+    ":hover": {
+      backgroundColor: "#e0e7ff",
+    },
+  },
+});
 
 export const theme = createTheme({
   typography: {
@@ -34,7 +66,7 @@ export const theme = createTheme({
     },
   },
   shape: {
-    borderRadius: 16,
+    borderRadius: 12,
   },
   palette: {
     primary: {
@@ -80,6 +112,14 @@ export const theme = createTheme({
         },
       },
     },
+    MuiMenu: {
+      defaultProps: {
+        PaperProps: {
+          sx: menuPaperStype,
+          elevation: 0,
+        },
+      },
+    },
     MuiAvatar: {
       styleOverrides: {
         root: {
@@ -111,18 +151,32 @@ export const theme = createTheme({
             borderWidth: 2,
           },
         },
-        sizeLarge: {
-          padding: "1rem 2rem",
-        },
       },
       variants: [
         {
           props: { size: "medium" },
           style: {
-            padding: "8px 16px",
+            padding: "6px 18px",
           },
         },
       ],
+    },
+    MuiListItemButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: "1rem",
+          "&.Mui-selected": {
+            backgroundColor: "#e0e7ff",
+          },
+        },
+      },
+    },
+    MuiListItemIcon: {
+      styleOverrides: {
+        root: {
+          minWidth: "36px",
+        },
+      },
     },
   },
 });

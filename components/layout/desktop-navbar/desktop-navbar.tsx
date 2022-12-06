@@ -1,6 +1,5 @@
-import type { UrlObject } from "url";
-
-import { useRouter } from "next/router";
+import type { CSSProperties } from "react";
+import type { SxProps, Theme } from "@mui/material";
 
 import Toolbar from "@mui/material/Toolbar";
 import TextField from "@mui/material/TextField";
@@ -10,26 +9,106 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { OutlinedInputProps } from "@mui/material/OutlinedInput";
-import GridViewRoundedIcon from "@mui/icons-material/GridViewRounded";
-import Tooltip from "@mui/material/Tooltip";
-import Grid from "@mui/material/Unstable_Grid2";
 
-import { Link, Button, Modal } from "components";
+import { Link } from "components";
 import UserMenu from "./user-menu";
-import {
-  searchFieldStyle,
-  searchIconStyle,
-  buttonCategoriesStyle,
-  navbarBrandStyle,
-  navbarContainerStyle,
-  rightContentStyle,
-  searchbarStyle,
-  centerContentStyle,
-  navbarStyle,
-} from "./desktop-navbar.style";
-import { SxProps, Theme, useMediaQuery, useTheme } from "@mui/material";
+import { AppMenu } from "./app-menu";
 
-import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
+export const navbarContainerStyle: SxProps<Theme> = ({ breakpoints, palette }) => ({
+  zIndex: 100,
+  boxShadow: "none",
+  position: "fixed",
+  top: 0,
+  right: 0,
+  left: 0,
+  height: "6rem",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  backgroundColor: palette.background.default,
+  [breakpoints.down("md")]: {
+    display: "none",
+  },
+});
+
+export const searchIconStyle: SxProps<Theme> = ({ palette }) => ({
+  backgroundColor: palette.primary.main,
+  borderRadius: "12px",
+  width: "2.8rem",
+  height: "2.2rem",
+  color: "white",
+  fontSize: "1.5rem",
+  ":hover": {
+    backgroundColor: palette.primary.main,
+    opacity: 0.9,
+  },
+});
+
+export const searchbarStyle: SxProps<Theme> = ({ breakpoints }) => ({
+  display: "flex",
+  width: "60%",
+  [breakpoints.down("lg")]: {
+    width: "75%",
+  },
+});
+
+export const centerContentStyle: SxProps<Theme> = {
+  flexGrow: 1,
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+};
+
+export const navbarBrandStyle: SxProps<Theme> = ({ palette, breakpoints }) => ({
+  marginRight: "1rem",
+  fontWeight: 800,
+  fontSize: "1.25rem",
+  ":hover": {
+    color: palette.primary.main,
+  },
+  [breakpoints.down("lg")]: {
+    marginRight: "0.6rem",
+    fontSize: "1.1rem",
+  },
+});
+
+export const buttonCategoriesStyle: SxProps<Theme> = {
+  paddingLeft: "1.5rem",
+  paddingRight: "1.5rem",
+  borderBottomRightRadius: 0,
+  borderTopRightRadius: 0,
+  borderRight: "none",
+  fontWeight: 500,
+  fontSize: "0.875rem",
+  ":hover": {
+    borderRight: "none",
+  },
+};
+
+export const rightContentStyle: SxProps<Theme> = {
+  display: "flex",
+  alignItems: "center",
+};
+
+export const searchFieldStyle: SxProps<Theme> = ({ breakpoints }) => ({
+  paddingRight: "4px",
+  width: "60%",
+  margin: "auto",
+  [breakpoints.down("lg")]: {
+    width: "75%",
+  },
+});
+
+export const navbarStyle: SxProps<Theme> = {
+  width: "100%",
+  marginLeft: "1rem",
+  marginRight: "1rem",
+  borderRadius: "1rem",
+  backgroundColor: "white",
+  boxShadow: "rgb(50 71 92 / 10%) 0px 2px 10px 0px",
+};
+
+const searchInputStyle: CSSProperties = { padding: "12px 14px" };
 
 const SearchFieldInputProps: Partial<OutlinedInputProps> = {
   endAdornment: (
@@ -41,23 +120,11 @@ const SearchFieldInputProps: Partial<OutlinedInputProps> = {
   ),
   sx: searchFieldStyle,
   inputProps: {
-    style: { padding: "13px 14px" },
+    style: searchInputStyle,
   },
 };
 
-const appMenuStyle: SxProps<Theme> = ({}) => ({
-  // borderColor
-});
-
 export const DesktopNavbar = () => {
-  const router = useRouter();
-  const modalName = "app-menu";
-
-  const handleClickOpenModal = () => {
-    const url: UrlObject = { pathname: router.pathname, query: { [modalName]: true } };
-    router.push(url, undefined, { shallow: true });
-  };
-
   return (
     <>
       <Box sx={navbarContainerStyle}>
@@ -67,18 +134,13 @@ export const DesktopNavbar = () => {
               <Typography sx={navbarBrandStyle}>ZAL MART</Typography>
             </Link>
             <Box sx={centerContentStyle}>
-              <Box sx={searchbarStyle}>
-                <Button variant="outlined" size="small" sx={buttonCategoriesStyle}>
-                  Categories
-                </Button>
-                <TextField
-                  variant="outlined"
-                  size="small"
-                  placeholder="Search"
-                  InputProps={SearchFieldInputProps}
-                  fullWidth
-                />
-              </Box>
+              <TextField
+                variant="outlined"
+                size="small"
+                placeholder="Search"
+                InputProps={SearchFieldInputProps}
+                fullWidth
+              />
             </Box>
 
             <Box sx={rightContentStyle}>
@@ -92,64 +154,4 @@ export const DesktopNavbar = () => {
   );
 };
 
-const AppMenu = () => {
-  const router = useRouter();
-  const theme = useTheme();
-  const mobileView = useMediaQuery(theme.breakpoints.down("md"));
-  const modalName = "app-menu";
 
-  const handleClickOpenModal = () => {
-    const url: UrlObject = { pathname: router.pathname, query: { [modalName]: true } };
-    router.push(url, undefined, { shallow: true });
-  };
-
-  const appMenuStyle: SxProps<Theme> = ({ palette }) => ({
-    display: "flex",
-    aspectRatio: "1/1",
-    borderRadius: "1rem",
-    backgroundColor: "white",
-    boxShadow: "rgb(50 71 92 / 10%) 0px 2px 10px 0px",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "column",
-    cursor: "pointer",
-    ":hover": {
-      border: `1px solid ${palette.primary.main}`,
-    },
-  });
-
-  const appMenuIconStyle: SxProps<Theme> = ({ palette, breakpoints }) => ({
-    fontSize: "8rem",
-    margin: "4px",
-    color: palette.primary.main,
-  });
-
-  const appMenuTitleStyle: SxProps<Theme> = ({ breakpoints }) => ({
-    fontSize: "1rem",
-    textAlign: "center",
-  });
-
-  if (mobileView) return null;
-
-  return (
-    <>
-      <Tooltip title="Apps Menu">
-        <IconButton onClick={handleClickOpenModal}>
-          <GridViewRoundedIcon fontSize="large" />
-        </IconButton>
-      </Tooltip>
-      <Modal maxWidth="md" title="Menu" name={modalName}>
-        <Grid container spacing={2}>
-          {Array.from(Array(8)).map(() => (
-            <Grid xs={4}>
-              <Box sx={appMenuStyle}>
-                <DashboardRoundedIcon sx={appMenuIconStyle} />
-                <Typography sx={appMenuTitleStyle}>Dashboard Admin</Typography>
-              </Box>
-            </Grid>
-          ))}
-        </Grid>
-      </Modal>
-    </>
-  );
-};

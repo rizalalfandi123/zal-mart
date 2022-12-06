@@ -7,7 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 type TextFieldProps<T extends FieldValues> = Omit<MuiTextFieldProps, "name"> & {
-  control: Control<T>;
+  control?: Control<T>;
   name: Path<T>;
 };
 
@@ -33,7 +33,7 @@ const TextField = <T extends FieldValues>(props: TextFieldProps<T>) => {
         const error = errors.hasOwnProperty(props.name);
         const helperText = (errors[props.name]?.message as string) || "";
         const inputProps = { ...field, ...textFieldProps.inputProps };
-        const label = `Enter your ${name}` || textFieldProps.label;
+        const label = textFieldProps.label ? textFieldProps.label : `Enter your ${name}`;
 
         if (textFieldProps.type === "password") {
           return (
